@@ -1,5 +1,11 @@
 package com.lin.springdemo.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="customer")
@@ -17,7 +23,16 @@ public class Customer {
 	private String lastName;
 
 	@Column(name="email")
-	private String email;
+	private String email;	
+	
+	public Customer() {
+	}
+
+	public Customer(String firstName, String lastName, String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
 
 	public int getId() {
 		return id;
@@ -50,9 +65,10 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+	}
+	
 }
