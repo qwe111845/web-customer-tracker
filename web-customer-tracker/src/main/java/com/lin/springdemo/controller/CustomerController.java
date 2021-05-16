@@ -24,10 +24,22 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@GetMapping("/list")
-	public String listCustomers(Model theModel) {
+	public String listCustomers(Model theModel, @RequestParam(required=false) String sort) {
 		
 		// get customer from the dao 
-		List<Customer> theCustomers = customerService.getCustomers();
+		
+		
+		List<Customer> theCustomers = null;
+		
+		if (sort != null) {
+			int theSortField = Integer.parseInt(sort);
+			theCustomers = customerService.getCustomers(theSortField);
+			
+		} else {
+			
+			theCustomers = customerService.getCustomers();
+
+		}
 		
 		// add the customers to the model
 		theModel.addAttribute("customers", theCustomers);
